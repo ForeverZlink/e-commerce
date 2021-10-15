@@ -36,6 +36,7 @@ class Product(models.Model):
     name            = models.CharField(max_length=100, unique=True, blank=False,null=False)
     price           = models.FloatField()
     descripition    = models.TextField()
+    inventory       = models.IntegerField(default=None)
     imagem_product  = models.ManyToManyField(Imagem_Product)
 
     def __str__(self) -> str:
