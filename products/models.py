@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.fields.related import ManyToManyField
+from django.core.validators import MinValueValidator
 
 # Create your models here.
 
@@ -36,7 +37,7 @@ class Product(models.Model):
     name            = models.CharField(max_length=100, unique=True, blank=False,null=False)
     price           = models.FloatField()
     descripition    = models.TextField()
-    inventory       = models.IntegerField(default=None)
+    inventory       = models.IntegerField(default=None,validators=[MinValueValidator(0)])
     imagem_product  = models.ManyToManyField(Imagem_Product)
 
     def __str__(self) -> str:
