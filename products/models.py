@@ -5,14 +5,14 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 class Type_of_Product(models.Model):
-    type_product    = models.CharField(max_length= 100, unique=False,blank=False,null=False)
+    type_product    = models.CharField(max_length= 100, primary_key=True)
     public_target   = models.CharField(max_length=100, unique=False,blank=False,null=False)
 
     def __str__(self) -> str:
         return self.type_product
 
 class Mark_Product(models.Model):
-    name_of_mark            = models.CharField(max_length= 100, unique=False,blank=False,null=False)
+    name_of_mark            = models.CharField(max_length= 100, primary_key=True)
     description_of_mark     = models.TextField()
     date_of_creation        = models.DateField(auto_now_add=True)
 
@@ -21,7 +21,7 @@ class Mark_Product(models.Model):
 
 
 class Imagem_Product(models.Model):
-    name_image        = models.CharField(max_length=100,unique=True)
+    name_image        = models.CharField(max_length=100,primary_key=True)
     imagem_of_product = models.ImageField()
 
     def __str__(self) -> str:
@@ -34,7 +34,7 @@ class Imagem_Product(models.Model):
 class Product(models.Model):
     type_of_product = models.ForeignKey(Type_of_Product, on_delete=models.CASCADE)
     mark_of_product = models.ForeignKey(Mark_Product,on_delete=models.CASCADE)
-    name            = models.CharField(max_length=100, unique=True, blank=False,null=False)
+    name            = models.CharField(max_length=100, primary_key=True)
     price           = models.FloatField()
     descripition    = models.TextField()
     inventory       = models.IntegerField(default=None,validators=[MinValueValidator(0)])
