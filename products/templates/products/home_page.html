@@ -90,28 +90,39 @@
     </button>
   </div>
 <h1 class="text-center"> Listas de produtos</h1>
+
 <div class="album py-5 bg-light">
     <div class="container">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <img src="{% static 'products/imagens/fone.jpg' %}" alt="">
-            <div class="card-body">
-              <h5>Redmi Air Dots 3</h5>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                
-                  <button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button>
-                  
-                  <button disabled = "disabled" class="btn btn-lg btn-dark">Preço: R$200,44</button>
-                  
+      {% if all_products %}
+        {% for product in all_products  %}
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="{{product.imagem_product.all.0.imagem_of_product.url}}" alt="">
+                <div class="card-body">
+                  <h5>{{product.name}}</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    
+                      <button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button>
+                      
+                      <button disabled = "disabled" class="btn btn-lg btn-dark">R${{product.price}}</button>
+                      
+                    </div>
+                    
+                  </div>
                 </div>
-                
               </div>
             </div>
-          </div>
-        </div>
+        {% endfor %}
+      {% else %}
+        <h1>Infelizmente estamos sem produtos, jovem padawan :(</h1>
+      {% endif %}
+
+
+        
+        
         
   <!-- FOOTER -->
   <footer class="container">

@@ -10,13 +10,24 @@ class TestPagesWorks(TestCase):
 class TestViews(TestCase):
     @classmethod
     def setUp(self):
-        Type_of_Product.objects.create(type_product="SmartPhone",public_target="Everybody")
-
+        self.type_product     =Type_of_Product.objects.create(type_product="SmartPhone",public_target="Everybody")
+        self.mark_product     =Mark_Product.objects.create(name_of_mark="Samsumg",
+                description_of_mark="A mark of inovation")
 
         
 
     def test_home_page_logic(self):
-        print(Type_of_Product.objects.all())
+        Product.objects.create(
+            type_of_product=self.type_product,
+            mark_of_product=self.mark_product,
+            name='Galaxy A30',
+            price="1000",
+            descripition="A good cellphone",
+            inventory=5,
+            
+        )
+        
+    
 
 
         
