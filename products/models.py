@@ -35,7 +35,7 @@ class Product(models.Model):
     type_of_product = models.ForeignKey(Type_of_Product, on_delete=models.CASCADE)
     mark_of_product = models.ForeignKey(Mark_Product,on_delete=models.CASCADE)
     name            = models.CharField(max_length=100, primary_key=True)
-    price           = models.FloatField()
+    price           = models.DecimalField(max_digits=7,decimal_places=2)
     descripition    = models.TextField()
     inventory       = models.IntegerField(default=None,validators=[MinValueValidator(0)])
     imagem_product  = models.ManyToManyField(Imagem_Product)
