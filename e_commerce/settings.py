@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import os
 import django_heroku
+
+import sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,12 +77,28 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if sys.argv == "test":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    password        = "005f67a0e14f617f56daa8b24f93d00ba5693ada7f2aa1d7cdca12a795c2c11c"
+    host            = "ec2-23-23-162-138.compute-1.amazonaws.com"
+    database_name   = "df612vfqgd6sia"
+    database_user     = "ibqrtklkbqwczb"
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DB_NAME', database_name),
+            'USER': os.environ.get('DB_USER', database_user),
+            'PASSWORD': os.environ.get('DB_PASS',password ),
+            'HOST': host,
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
