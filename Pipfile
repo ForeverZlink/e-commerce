@@ -10,6 +10,8 @@ whitenoise = "*"
 django = "*"
 pillow = "*"
 psycopg2 = "*"
+django-storages = "*"
+dropbox = "*"
 
 [dev-packages]
 
