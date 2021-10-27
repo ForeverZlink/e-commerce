@@ -15,6 +15,7 @@ import os
 import django_heroku
 import dropbox
 
+
 import sys
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,7 +143,11 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+dbx = dropbox.Dropbox('UJy72IkO8x0AAAAAAAAAAWdV4aLjYSR2b509lgwps4w1KE2YNP8VqG2SgBcQD')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 DROPBOX_OAUTH2_TOKEN ='UJy72IkO8x0AAAAAAAAAAWdV4aLjYSR2b509lgwps4w1KE2YNP8VqG2SgBcQD-on'
