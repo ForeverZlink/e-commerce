@@ -146,7 +146,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 DROPBOX_OAUTH2_TOKEN ='UJy72IkO8x0AAAAAAAAAAWdV4aLjYSR2b509lgwps4w1KE2YNP8VqG2SgBcQD-on'
-DROPBOX_ROOT_PATH = "/riggs_store_images"
+DROPBOX_ROOT_PATH = ""
 
 STATIC_URL = '/static/'
 
