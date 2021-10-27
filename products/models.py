@@ -22,7 +22,7 @@ class Mark_Product(models.Model):
 
 class Imagem_Product(models.Model):
     name_image        = models.CharField(max_length=100,primary_key=True)
-    imagem_of_product = models.ImageField()
+    imagem_of_product = models.ImageField(upload_to="media")
 
     def __str__(self) -> str:
         return self.name_image

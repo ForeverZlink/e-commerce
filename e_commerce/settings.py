@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if sys.argv == "test":
+if sys.argv == 'test':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -143,6 +143,9 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DROPBOX_OAUTH2_TOKEN ='UJy72IkO8x0AAAAAAAAAAWdV4aLjYSR2b509lgwps4w1KE2YNP8VqG2SgBcQD-on'
+DROPBOX_ROOT_PATH = "/media"
 
 STATIC_URL = '/static/'
 
