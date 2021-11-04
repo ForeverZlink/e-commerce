@@ -105,7 +105,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                     
-                      <button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button>
+                      <a href="{% url 'products:detail_product' product.name%}"><button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button></a>
                       
                       <button disabled = "disabled" class="btn btn-lg btn-dark">R${{product.price}}</button>
                       
