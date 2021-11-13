@@ -146,12 +146,13 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+if sys.argv  not in 'test':
 
-dbx = dropbox.Dropbox('FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6')
+    dbx = dropbox.Dropbox('FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6')
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN ='FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6'
-DROPBOX_ROOT_PATH = ""
+    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+    DROPBOX_OAUTH2_TOKEN ='FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6'
+    DROPBOX_ROOT_PATH = ""
 
 STATIC_URL = '/static/'
 
