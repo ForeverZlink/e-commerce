@@ -27,10 +27,6 @@ class Imagem_Product(models.Model):
     def __str__(self) -> str:
         return self.name_image
     
-    
-    
-    
-
 class Product(models.Model):
     type_of_product = models.ForeignKey(Type_of_Product, on_delete=models.CASCADE)
     mark_of_product = models.ForeignKey(Mark_Product,on_delete=models.CASCADE)
