@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+
+from django.core.validators import BaseValidator
 import django_heroku
 import dropbox
 
@@ -146,13 +148,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-if sys.argv[0]  not in 'test':
 
-    dbx = dropbox.Dropbox('FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6')
-
-    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    DROPBOX_OAUTH2_TOKEN ='FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6'
-    DROPBOX_ROOT_PATH = ""
 
 STATIC_URL = '/static/'
 
