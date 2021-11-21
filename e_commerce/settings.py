@@ -146,7 +146,7 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-if sys.argv  not in 'test':
+if sys.argv[0]  not in 'test':
 
     dbx = dropbox.Dropbox('FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6')
 
