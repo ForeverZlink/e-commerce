@@ -1,6 +1,6 @@
 {% extends 'products/index.html' %}
 
-
+{% load static %}
 {% block content %}
 <main>
   <div class="container py-4">
@@ -21,9 +21,32 @@
         <h1 class="text-primary">Preço R$: {{product.price}}</h1>
 
         <p class="col-md-8 fs-3">{{product.descripition}}</p>
-        
-        <button class="btn btn-danger btn-lg" type="button">Comprar</button>
-      </div>
+
+
+        <!-- Button trigger modal -->
+        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#compraModal" type="button">Comprar</button>
+            <!-- Modal -->
+            <div class="modal fade" id="compraModal" tabindex="-1" aria-labelledby="compraModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="compraModalLabel">Confimar compra do produto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h3>Detalhes do produto</h3>
+                    <p>Nome: {{product.name}}</p>
+                    <p>Preço  :R${{product.price}}</p>
+                    
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar compra</button>
+                      <button type="button" class="btn btn-primary">Confimar compra</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     <div class="row align-items-md-stretch">
@@ -48,5 +71,7 @@
     </footer>
   </div>
 </main>
+<script src="{% static 'products/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
+     
 {% endblock content %}
