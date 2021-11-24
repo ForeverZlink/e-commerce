@@ -4,7 +4,7 @@ from orders.models import ShoppingCart, Orders
 
 # Create your views here.
 def new_order(request,pk_product):
-    user    = request.user.pk
+    user    = request.user
     order   = Orders.objects.create(
                 user = user , 
                 product=pk_product

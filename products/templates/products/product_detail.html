@@ -37,11 +37,12 @@
                     <h3>Detalhes do produto</h3>
                     <p>Nome: {{product.name}}</p>
                     <p>Preço  :R${{product.price}}</p>
+                  
                     
                   </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar compra</button>
-                      <button type="button" class="btn btn-primary">Confimar compra</button>
+                      <a href="{% url 'orders:new_order' product.name %}"><button type="button" class="btn btn-primary">Confimar compra</button></a>
                     </div>
                 </div>
               </div>
