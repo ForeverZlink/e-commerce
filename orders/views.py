@@ -21,17 +21,17 @@ def new_order(request,pk_product):
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
-
+    
     email = EmailMessage(
-            f'Novo pedido dedddkkkkiikoioioii {username_user} ',
-            f'O item pedido foi dddd{product.name}, preço {product.price}   ',
-            to=[request.user.email],
+            f'Novo pedido de {username_user} ',
+            f'O item pedido foi {product.name}, preço {product.price}.   ',
+            to=[request.user.email ],
             )
     email.send()
 
     return HttpResponseRedirect(reverse('products:home_page'))
     
 def show_orders(request,pk_user):
-    products = Orders.objects.filter(user__pk=pk_user)
+    products = Orders.objects;filter(user__pk=pk_user)
     print(products)
     return HttpResponseRedirect(reverse('products:home_page'))

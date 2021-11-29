@@ -23,9 +23,11 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">Lista de Desejos</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
-          </li>
+          {% if user.is_authenticated  %}
+              <li class="nav-item">
+                <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
+              </li>
+          {% endif %}
         </ul>
         <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
