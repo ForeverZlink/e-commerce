@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+
+from django.core.validators import BaseValidator
 import django_heroku
 import dropbox
 
@@ -130,11 +132,16 @@ MEDIA_URL = '/media/'
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+<<<<<<< HEAD
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'zeldaforever9@gmail.com'
 EMAIL_HOST_PASSWORD = '91818872'
 EMAIL_PORT = 587
+=======
+
+
+>>>>>>> 374cd1ece91edd5975a7f9427328bfe93dbc9de3
 
 STATIC_URL = '/static/'
 
