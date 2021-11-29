@@ -31,3 +31,7 @@ def new_order(request,pk_product):
 
     return HttpResponseRedirect(reverse('products:home_page'))
     
+def show_orders(request,pk_user):
+    products = Orders.objects.filter(user__pk=pk_user)
+    print(products)
+    return HttpResponseRedirect(reverse('products:home_page'))

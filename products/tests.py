@@ -1,6 +1,8 @@
 from django.http import response
 from django.test import TestCase
 from products.models import *
+
+from django.contrib.auth.models import User
 from django.shortcuts import reverse
 # Create your tests here.
 class TestPagesWorks(TestCase):
@@ -9,10 +11,12 @@ class TestPagesWorks(TestCase):
         self.type_product     =Type_of_Product.objects.create(type_product="SmartPhone",public_target="Everybody")
         self.mark_product     =Mark_Product.objects.create(name_of_mark="Samsumg",
                 description_of_mark="A mark of inovation")
-       
+        self.user             = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+        self.user.save()
      
 
     def test_if_home_page_works(self):
+        self.client.login(username='john',password='johnpassword')
         url = '//'
         response = self.client.get(url)
         self.assertEqual(200,response.status_code)

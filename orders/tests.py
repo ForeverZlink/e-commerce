@@ -26,10 +26,21 @@ class TestViews(TestCase):
 
     def test_create_new_order(self):
         self.client.login(username='john',password='johnpassword')
-
         path  = 'orders:new_order'
         response=self.client.get(reverse(path,args=(self.product,)))
         self.assertEqual(response.status_code,302)
         order = Orders.objects.all()[0]
         
         self.assertEqual(order.product.name,"Galaxy A30")
+    def test_show_orders(self):
+        self.client.login(username='john',password='johnpassword')
+        
+        Orders.objects.create(user=self.user,product=self.product)
+        path  = 'orders:show_orders'
+        
+        user_pk=self.user.pk
+
+        
+        response=self.client.get(reverse(path,args=(user_pk,)))
+        self.assertEqual(response.status_code,302)
+        

@@ -10,7 +10,8 @@ class Orders(models.Model):
     product     = models.ForeignKey(Product, on_delete=models.CASCADE)
     date_of_order= models.DateTimeField(auto_now_add=True)
     quantity    = models.IntegerField(default=1,validators=[MinValueValidator(0),MaxValueValidator(7)])
-
+    def __str__(self) -> str:
+        return self.user.username
 class ShoppingCart(models.Model):
 
     orders=models.ManyToManyField(Orders)
