@@ -36,7 +36,6 @@ class TestViews(TestCase):
         cart_of_client=ShoppingCart.objects.get(user__pk=self.user.pk)
         cart_of_client.orders.add(order)
         print(cart_of_client.orders.all(),'fff')
-        
     def test_show_orders(self):
         self.client.login(username='john',password='johnpassword')
         
