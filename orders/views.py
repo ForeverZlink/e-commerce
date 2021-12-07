@@ -18,6 +18,16 @@ def new_order(request,pk_product):
                 product=product
             )
     order.save()
+    try:
+        #testa se o usuário já possui um carrinho
+        ShoppingCart.objects.get(user__pk=user_pk)
+    except:
+        ShoppingCart.objects.create(user=request.user)
+        
+    finally:
+        cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
+        cart_of_user.orders.add(order)
+    
 
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
@@ -29,6 +39,7 @@ def new_order(request,pk_product):
             to=[request.user.email ],
             )
     email.send()
+
 
     return HttpResponseRedirect(reverse('products:home_page'))
     

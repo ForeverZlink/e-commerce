@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from orders.models import Orders
+from orders.models import Orders,ShoppingCart
 from products.models import *
 from django.shortcuts import reverse
 # Create your tests here.
@@ -32,6 +32,11 @@ class TestViews(TestCase):
         order = Orders.objects.all()[0]
         
         self.assertEqual(order.product.name,"Galaxy A30")
+        #parte do carrinho de compras
+        cart_of_client=ShoppingCart.objects.get(user__pk=self.user.pk)
+        cart_of_client.orders.add(order)
+        print(cart_of_client.orders.all(),'fff')
+        
     def test_show_orders(self):
         self.client.login(username='john',password='johnpassword')
         

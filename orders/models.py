@@ -15,3 +15,5 @@ class Orders(models.Model):
 class ShoppingCart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     orders=models.ManyToManyField(Orders)
+    def __str__(self) -> str:
+        return  self.user.username
