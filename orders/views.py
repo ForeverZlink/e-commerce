@@ -18,7 +18,7 @@ def new_order(request,pk_product):
                 product=product
             )
     order.save()
-    
+
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
