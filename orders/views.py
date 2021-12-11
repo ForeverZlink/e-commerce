@@ -12,18 +12,18 @@ def finish_order(request,pk_user):
     from django.core.mail import EmailMessage
     username_user = request.user.username
     cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
-    text_for_email=''
+    head_for_email=f'Novo pedido feito por {username_user}'
+    content_for_email = []
     for order in cart_of_user.orders.all():
-        print(order.product)
-        
-
-
+        text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}'
+        content_for_email.append(text)
+    
     email = EmailMessage(
-            f'Novo pedido de {username_user} ',
-            f'O item pedido foi , preço .   ',
+            f'{head_for_email}',
+            (text_of_order for text_of_order in content_for_email),
             to=[request.user.email ],
             )
-    email.send()
+    resp=email.send()
     return HttpResponseRedirect(reverse('products:home_page'))
 
 
