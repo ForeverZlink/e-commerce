@@ -24,13 +24,13 @@
 
 
         <!-- Button trigger modal -->
-        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#compraModal" type="button">Comprar</button>
+        <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#compraModal" type="button">Adicionar ao carinho</button>
             <!-- Modal -->
             <div class="modal fade" id="compraModal" tabindex="-1" aria-labelledby="compraModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="compraModalLabel">Confimar compra do produto</h5>
+                    <h5 class="modal-title" id="compraModalLabel">Adicionar produto ao carinho</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -41,8 +41,8 @@
                     
                   </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar compra</button>
-                      <a href="{% url 'orders:new_order' product.name %}"><button type="button" class="btn btn-primary">Confimar compra</button></a>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                      <a href="{% url 'orders:new_order' product.name %}"><button type="button" class="btn btn-primary">Adicionar ao carinho</button></a>
                     </div>
                 </div>
               </div>

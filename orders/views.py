@@ -7,6 +7,27 @@ from products.models import Product
 
 
 # Create your views here.
+def finish_order(request,pk_user):
+        #enviar  um email para o dono da loja com o pedido
+    from django.core.mail import EmailMessage
+    username_user = request.user.username
+    cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
+    text_for_email=''
+    for order in cart_of_user.orders.all():
+        print(order.product)
+        
+
+
+    email = EmailMessage(
+            f'Novo pedido de {username_user} ',
+            f'O item pedido foi , preço .   ',
+            to=[request.user.email ],
+            )
+    email.send()
+    return HttpResponseRedirect(reverse('products:home_page'))
+
+
+
 def new_order(request,pk_product):
     
     product=Product.objects.get(pk=pk_product)
@@ -29,16 +50,7 @@ def new_order(request,pk_product):
         cart_of_user.orders.add(order)
     
 
-        #enviar  um email para o dono da loja com o pedido
-    from django.core.mail import EmailMessage
-    username_user = request.user.username
     
-    email = EmailMessage(
-            f'Novo pedido de {username_user} ',
-            f'O item pedido foi {product.name}, preço {product.price}.   ',
-            to=[request.user.email ],
-            )
-    email.send()
 
 
     return HttpResponseRedirect(reverse('products:home_page'))

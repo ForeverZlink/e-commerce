@@ -22,8 +22,9 @@ class TestViews(TestCase):
             inventory=5,
             
         )
+        
         self.product.save()
-
+       
     def test_create_new_order(self):
         self.client.login(username='john',password='johnpassword')
         path  = 'orders:new_order'
@@ -47,4 +48,15 @@ class TestViews(TestCase):
         
         response=self.client.get(reverse(path,args=(user_pk,)))
         self.assertEqual(response.status_code,302)
+        
+    def test_finish_orders(self):
+        self.client.login(username='john',password='johnpassword')
+        
+        order=Orders.objects.create(user=self.user,product=self.product)
+        path  = 'orders:finish_order'
+        user_pk=self.user.pk
+
+        self.shopping_cart=ShoppingCart.objects.create(user=self.user)
+        self.shopping_cart.orders.add(order)
+        response=self.client.get(reverse(path,args=(user_pk,)))
         
