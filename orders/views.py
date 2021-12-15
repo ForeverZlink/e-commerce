@@ -7,11 +7,20 @@ from products.models import Product
 
 
 # Create your views here.
-def finish_order(request,pk_user):
+def finish_order(request,user_pk):
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
-    cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
+    try:
+        #testa se o usuário já possui um carrinho
+        ShoppingCart.objects.get(user__pk=user_pk)
+    except:
+        ShoppingCart.objects.create(user=request.user)
+        
+    finally:
+        cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
+        cart_of_user.orders.add(order)
+
     head_for_email=f'Novo pedido feito por {username_user}'
     content_for_email = ""
     for order in cart_of_user.orders.all():
@@ -30,7 +39,7 @@ def finish_order(request,pk_user):
 
 
 def new_order(request,pk_product):
-    
+    from django.core.mail import EmailMessage
     product=Product.objects.get(pk=pk_product)
     user_pk  = request.user.pk
     
@@ -39,21 +48,16 @@ def new_order(request,pk_product):
                 user = user_instance , 
                 product=product
             )
+
     order.save()
-    try:
-        #testa se o usuário já possui um carrinho
-        ShoppingCart.objects.get(user__pk=user_pk)
-    except:
-        ShoppingCart.objects.create(user=request.user)
-        
-    finally:
-        cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
-        cart_of_user.orders.add(order)
+    text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}\n'
+    email = EmailMessage(
+            f'Novo pedido de {request.user.username}',
+            f"{text}",
+            to=[request.user.email ],
+            )
+    email.send()
     
-
-    
-
-
     return HttpResponseRedirect(reverse('products:home_page'))
     
 def show_orders(request,pk_user):
