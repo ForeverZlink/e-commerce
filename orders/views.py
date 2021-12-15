@@ -13,17 +13,18 @@ def finish_order(request,pk_user):
     username_user = request.user.username
     cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
     head_for_email=f'Novo pedido feito por {username_user}'
-    content_for_email = []
+    content_for_email = ""
     for order in cart_of_user.orders.all():
-        text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}'
-        content_for_email.append(text)
+        text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}\n'
+        content_for_email+=text
+      
     
     email = EmailMessage(
             f'{head_for_email}',
-            (text_of_order for text_of_order in content_for_email),
+            f"{content_for_email}",
             to=[request.user.email ],
             )
-    resp=email.send()
+    email.send()
     return HttpResponseRedirect(reverse('products:home_page'))
 
 
