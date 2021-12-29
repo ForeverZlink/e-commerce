@@ -7,19 +7,12 @@ from products.models import Product
 
 
 # Create your views here.
-def finish_order(request,user_pk):
+def finish_order_of_cart(request,pk_user):
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
-    try:
-        #testa se o usuário já possui um carrinho
-        ShoppingCart.objects.get(user__pk=user_pk)
-    except:
-        ShoppingCart.objects.create(user=request.user)
-        
-    finally:
-        cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
-        cart_of_user.orders.add(order)
+    cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
+    
 
     head_for_email=f'Novo pedido feito por {username_user}'
     content_for_email = ""
@@ -38,7 +31,7 @@ def finish_order(request,user_pk):
 
 
 
-def new_order(request,pk_product):
+def new_order_or_add_in_cart(request,pk_product,add_in_cart='false'):
     from django.core.mail import EmailMessage
     product=Product.objects.get(pk=pk_product)
     user_pk  = request.user.pk
@@ -50,14 +43,27 @@ def new_order(request,pk_product):
             )
 
     order.save()
-    text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}\n'
-    email = EmailMessage(
-            f'Novo pedido de {request.user.username}',
-            f"{text}",
-            to=[request.user.email ],
-            )
-    email.send()
-    
+    if add_in_cart =="true":
+        #parte provisória, irei mudar depois de criar o esquema de criação de usuário
+        try:
+        #testa se o usuário já possui um carrinho
+            cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
+        except:
+            cart_of_user=ShoppingCart.objects.create(user=request.user)
+        
+        finally:
+            cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
+
+        cart_of_user.orders.add(order)
+    else:
+        text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}\n'
+        email = EmailMessage(
+                f'Novo pedido de {request.user.username}',
+                f"{text}",
+                to=[request.user.email ],
+                )
+        email.send()
+        
     return HttpResponseRedirect(reverse('products:home_page'))
     
 def show_orders(request,pk_user):

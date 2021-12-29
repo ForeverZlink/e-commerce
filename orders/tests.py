@@ -24,7 +24,7 @@ class TestViews(TestCase):
         )
         
         self.product.save()
-       
+        
     def test_create_new_order(self):
         self.client.login(username='john',password='johnpassword')
         path  = 'orders:new_order'
@@ -34,9 +34,10 @@ class TestViews(TestCase):
         
         self.assertEqual(order.product.name,"Galaxy A30")
         #parte do carrinho de compras
-        cart_of_client=ShoppingCart.objects.get(user__pk=self.user.pk)
-        cart_of_client.orders.add(order)
-        print(cart_of_client.orders.all(),'fff')
+        self.shopping_cart = ShoppingCart.objects.create(user=self.user)
+        self.shopping_cart.save()
+        self.shopping_cart.orders.add(order)
+        print(self.shopping_cart.orders.all(),'fff')
     def test_show_orders(self):
         self.client.login(username='john',password='johnpassword')
         
