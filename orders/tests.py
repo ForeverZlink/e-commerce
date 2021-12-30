@@ -25,9 +25,9 @@ class TestViews(TestCase):
         
         self.product.save()
         
-    def test_create_new_order(self):
+    def test_create_new_order_or_add_in_cart(self):
         self.client.login(username='john',password='johnpassword')
-        path  = 'orders:new_order'
+        path  = 'orders:new_order_or_add_in_cart'
         response=self.client.get(reverse(path,args=(self.product,)))
         self.assertEqual(response.status_code,302)
         order = Orders.objects.all()[0]

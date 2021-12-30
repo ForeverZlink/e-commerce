@@ -21,7 +21,7 @@ class TestPagesWorks(TestCase):
         response = self.client.get(url)
         self.assertEqual(200,response.status_code)
     def test_detail_page_product_works(self):
-        Product.objects.create(
+        produc=Product.objects.create(
             type_of_product=self.type_product,
             mark_of_product=self.mark_product,
             name='Galaxy A30',
@@ -30,6 +30,7 @@ class TestPagesWorks(TestCase):
             inventory=5,
             
         )
+        produc.save()
         url = reverse('products:detail_product',args=('Galaxy A30',))
         response= self.client.get(url)
         self.assertEqual(response.status_code, 200)
