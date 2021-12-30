@@ -1,0 +1,99 @@
+{% extends 'products/index.html' %}
+{% load static %}
+{% block title %}
+
+
+<link href="{% static 'products/bootstrap/css/carousel.css' %}" rel="stylesheet">{% endblock title %}
+
+{% block content %}
+<body>
+
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Riggs Store</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>7
+          {% if user.is_authenticated  %}
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'orders:finish_order' user.pk %}">carrinho</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Busca</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class="active" aria-current="true"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+   
+  </div>
+<h1 class="text-center"> Seus Pedidos</h1>
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% if all_orders %}
+        {% for order in all_orders  %}
+            <div class="col">
+              <div class="card shadow-sm">
+                <img src="{{order.product.imagem_product.all.0.imagem_of_product.url}}" class="img-thumbnail" alt="">
+                <div class="card-body">
+                  <h5>{{order.product.name}}</h5>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    
+                      <a href="{% url 'products:detail_product' order.product.name%}"><button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button></a>
+                      
+                      <button disabled = "disabled" class="btn btn-lg btn-dark">R${{order.product.price}}</button>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+      {% else %}
+        <h1>Você ainda não fez nenhum pedido. ;)</h1>
+      {% endif %}
+
+
+        
+        
+  <!-- FOOTER -->
+  <footer class="container">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p>© 2017–2021 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+  </footer>
+</main>
+
+
+    <script src="{% static 'products/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+      
+  
+
+</body>
+{% endblock content %}

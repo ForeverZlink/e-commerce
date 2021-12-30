@@ -69,6 +69,6 @@ def new_order_or_add_in_cart(request,pk_product,add_in_cart='false'):
     return HttpResponseRedirect(reverse('products:home_page'))
     
 def show_orders(request,pk_user):
-    products = Orders.objects.filter(user__pk=pk_user)
-    print(products)
-    return HttpResponseRedirect(reverse('products:home_page'))
+    orders = Orders.objects.filter(user__pk=pk_user)
+    print()
+    return render(request, 'products/show_orders.html',context={'all_orders':orders})
