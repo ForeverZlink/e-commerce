@@ -19,14 +19,14 @@
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
+          </li>7
+          {% if user.is_authenticated  %}
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'orders:finish_order' user.pk %}">carrinho</a>
           </li>
-          {% if user.is_authenticated  %}
-              <li class="nav-item">
-                <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
-              </li>
+          <li class="nav-item">
+            <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
+          </li>
           {% endif %}
         </ul>
         <form class="d-flex">
