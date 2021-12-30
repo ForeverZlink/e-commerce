@@ -27,6 +27,8 @@ def finish_order_of_cart(request,pk_user):
             to=[request.user.email ],
             )
     email.send()
+    #apaga todos os pedidos do carrinho de compras, pois o que é comprado não precisa estar no carrinho para as futuras compras 
+    cart_of_user.orders.all().delete()
     return HttpResponseRedirect(reverse('products:home_page'))
 
 
