@@ -7,10 +7,12 @@ from products.models import Product
 
 
 # Create your views here.
-def finish_order_of_cart(request,pk_user):
+
+def finish_order_of_cart(request):
         #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
+    pk_user=request.user.pk
     cart_of_user=ShoppingCart.objects.get(user__pk=pk_user)
     
 
@@ -68,7 +70,8 @@ def new_order_or_add_in_cart(request,pk_product,add_in_cart='false'):
         
     return HttpResponseRedirect(reverse('products:home_page'))
     
-def show_orders(request,pk_user):
+def show_orders(request):
+    pk_user = request.user.pk
     orders = Orders.objects.filter(user__pk=pk_user)
     print()
     return render(request, 'products/show_orders.html',context={'all_orders':orders})

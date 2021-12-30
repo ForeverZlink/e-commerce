@@ -22,10 +22,10 @@
           </li>7
           {% if user.is_authenticated  %}
           <li class="nav-item">
-            <a class="nav-link active" href="{% url 'orders:finish_order' user.pk %}">carrinho</a>
+            <a class="nav-link active" href="{% url 'orders:finish_order' %}">carrinho</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active"href="{% url 'orders:show_orders' user.pk %}">Meu pedidos</a>
+            <a class="nav-link active"href="{% url 'orders:show_orders' %}">Meu pedidos</a>
           </li>
           {% endif %}
         </ul>
