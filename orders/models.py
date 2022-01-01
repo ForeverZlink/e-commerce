@@ -14,8 +14,13 @@ class Orders(models.Model):
     quantity    = models.IntegerField(default=1,validators=[MinValueValidator(0),MaxValueValidator(7)])
     def __str__(self) -> str:
         return self.user.username
+
+
+class OrdersInCart(models.Model):
+    user     = models.ForeignKey(User,on_delete=models.CASCADE)
+    product  = models.ForeignKey(Product, on_delete=models.CASCADE)
 class ShoppingCart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    orders=models.ManyToManyField(Orders)
+    orders=models.ManyToManyField(OrdersInCart)
     def __str__(self) -> str:
         return  self.user.username
