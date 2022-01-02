@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from orders.models import Orders,ShoppingCart
+from orders.models import Orders, OrdersInCart,ShoppingCart
 from products.models import *
 from django.shortcuts import reverse
 # Create your tests here.
@@ -26,6 +26,8 @@ class TestViews(TestCase):
         self.product.save()
         
     def test_create_new_order_or_add_in_cart(self):
+
+        #testa a criação da order 
         self.client.login(username='john',password='johnpassword')
         path  = 'orders:new_order_or_add_in_cart'
         response=self.client.get(reverse(path,args=(self.product,)))
@@ -33,12 +35,20 @@ class TestViews(TestCase):
         order = Orders.objects.all()[0]
         
         self.assertEqual(order.product.name,"Galaxy A30")
+
+
+
         #parte do carrinho de compras
+        path  = 'orders:new_order_or_add_in_cart'
+        response=self.client.get(reverse(path,args=(self.product,"true")))
+        order_in_cart = OrdersInCart.objects.all()[0]
+        self.assertEqual(response.status_code,302)
         self.shopping_cart = ShoppingCart.objects.create(user=self.user)
         self.shopping_cart.save()
-        self.shopping_cart.orders.add(order)
+        self.shopping_cart.orders.add(order_in_cart)
         self.shopping_cart.orders.all().delete()
         print(self.shopping_cart.orders.all(),'fff')
+        
     def test_show_orders(self):
         self.client.login(username='john',password='johnpassword')
         
@@ -54,7 +64,7 @@ class TestViews(TestCase):
     def test_finish_orders(self):
         self.client.login(username='john',password='johnpassword')
         
-        order=Orders.objects.create(user=self.user,product=self.product)
+        order=OrdersInCart.objects.create(user=self.user,product=self.product)
         path  = 'orders:finish_order'
         
 
