@@ -5,8 +5,12 @@ from django.contrib.auth.models import User
 from orders.models import ShoppingCart, Orders,OrdersInCart
 from products.models import Product
 
+from django.template.loader import render_to_string
 
 # Create your views here.
+EMAIL_DO_DONO_DO_SITE='foreverzlink300@gmail.com'
+
+
 
 def finish_order_of_cart(request):
         #enviar  um email para o dono da loja com o pedido
@@ -60,20 +64,25 @@ def new_order_or_add_in_cart(request,pk_product,add_in_cart='false'):
 
         cart_of_user.orders.add(order_for_cart)
     else:
+            
         order   = Orders.objects.create(
                 user = user_instance , 
                 product=product
             )
-
         order.save()
-        text=f'Produto pedido:{order.product.name}  Preço:R${order.product.price}   Data e hora do pedido:{order.date_of_order}\n'
+
+
+         #email enviado para o dono da loja, avisando que há um novo pedido
+        html = render_to_string('orders/templates_of_email/new_order.html',
+                    context={'order':order,"cliente":request.user.username})
         email = EmailMessage(
                 f'Novo pedido de {request.user.username}',
-                f"{text}",
-                to=[request.user.email ],
+                html,    
+                to=[EMAIL_DO_DONO_DO_SITE],
                 )
+        email.content_subtype ="html"
         email.send()
-        
+            
     return HttpResponseRedirect(reverse('products:home_page'))
     
 def show_orders(request,orders_in_cart = 'false'):
