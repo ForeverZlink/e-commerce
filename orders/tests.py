@@ -22,9 +22,29 @@ class TestViews(TestCase):
             inventory=5,
             
         )
+
         
         self.product.save()
+
         
+    def test_remove_order_of_cart(self):
+        self.client.login(username='john',password='johnpassword')
+        path_remove_of_cart = 'orders:remove_of_cart'
+        path_add_cart  = 'orders:new_order_or_add_in_cart'
+        #na view, foi criado um novo pedido
+        add_order_in_cart_response=self.client.get(reverse(path_add_cart,args=(self.product,"true"),))
+        
+        #Coloquei esse numero porque é o pk da OrderInCart que criei na linha anterior
+        pk_do_pedido = 1
+
+        delete_order_in_cart_response = self.client.get(reverse(path_remove_of_cart,args=(pk_do_pedido,),))
+        self.assertEqual(add_order_in_cart_response.status_code,302)
+        self.assertEqual(delete_order_in_cart_response.status_code,302)
+
+
+
+
+
     def test_create_new_order_or_add_in_cart(self):
 
         #testa a criação da order 
@@ -39,12 +59,11 @@ class TestViews(TestCase):
 
 
         #parte do carrinho de compras
-        path  = 'orders:new_order_or_add_in_cart'
-        response=self.client.get(reverse(path,args=(self.product,"true")))
-        order_in_cart = OrdersInCart.objects.all()[0]
-        self.assertEqual(response.status_code,302)
         self.shopping_cart = ShoppingCart.objects.create(user=self.user)
         self.shopping_cart.save()
+        response =self.client.get(reverse(path,args=(self.product,"true"),))
+        order_in_cart = OrdersInCart.objects.all()[0]
+        self.assertEqual(response.status_code,302)
         self.shopping_cart.orders.add(order_in_cart)
         self.shopping_cart.orders.all().delete()
         print(self.shopping_cart.orders.all(),'fff')

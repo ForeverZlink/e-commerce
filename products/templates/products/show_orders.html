@@ -67,6 +67,10 @@
                       <a href="{% url 'products:detail_product' order.product.name%}"><button type="button" class="btn btn-lg btn-outline-primary">Ver produto</button></a>
                       
                       <button disabled = "disabled" class="btn btn-lg btn-dark">R${{order.product.price}}</button>
+                      {% if are_in_cart  != "false" %}
+                      <a href="{% url 'orders:remove_of_cart' order.pk%}"><button type="button" class="btn btn-danger btn-outline-light">Remover do carrinho</button></a>
+                      
+                      {% endif %}
                       
                     </div>
                     

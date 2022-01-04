@@ -1,4 +1,5 @@
 from django.db.models.query import RawQuerySet
+from django.http.request import HttpHeaders
 from django.http.response import HttpResponse, HttpResponseNotModified, HttpResponseRedirect
 from django.shortcuts import render, reverse
 from django.contrib.auth.models import User
@@ -10,10 +11,16 @@ from django.template.loader import render_to_string
 # Create your views here.
 EMAIL_DO_DONO_DO_SITE='foreverzlink300@gmail.com'
 
+def remove_of_cart(request,order_pk):
+    user_pk = request.user.pk
+    product = OrdersInCart.objects.get(pk=order_pk)
+    cart_of_user=ShoppingCart.objects.get(user__pk=user_pk)
+    cart_of_user.orders.remove(product)
+    return HttpResponseRedirect(reverse('products:home_page'))
 
 
 def finish_order_of_cart(request):
-        #enviar  um email para o dono da loja com o pedido
+    #enviar  um email para o dono da loja com o pedido
     from django.core.mail import EmailMessage
     username_user = request.user.username
     pk_user=request.user.pk
@@ -87,6 +94,7 @@ def new_order_or_add_in_cart(request,pk_product,add_in_cart='false'):
     
 def show_orders(request,orders_in_cart = 'false'):
     pk_user = request.user.pk
+    
     if orders_in_cart == 'false':
         local = 'Pedidos já feitos'
         orders = Orders.objects.filter(user__pk=pk_user)
@@ -94,7 +102,8 @@ def show_orders(request,orders_in_cart = 'false'):
         local = 'Seu Carrinho de Compras'
         cart= ShoppingCart.objects.get(user__pk=pk_user)
         orders = cart.orders.all()
+        
     print()
     return render(request, 'products/show_orders.html',
-                context={'all_orders':orders,"local_of_orders_text":local
+                context={'all_orders':orders,"local_of_orders_text":local,'are_in_cart':orders_in_cart
             })

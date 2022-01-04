@@ -18,14 +18,14 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'products:home_page' %}">Página Inicial</a>
           </li>7
           {% if user.is_authenticated  %}
           <li class="nav-item">
             <a class="nav-link active" href="{% url 'orders:show_orders' "true"%}">Carrinho</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active"href="{% url 'orders:show_orders'%}">Meu pedidos</a>
+            <a class="nav-link active"href="{% url 'orders:show_orders'%}">Meus pedidos</a>
           </li>
           {% endif %}
         </ul>
