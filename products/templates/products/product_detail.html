@@ -22,8 +22,9 @@
 
         <p class="col-md-8 fs-3">{{product.descripition}}</p>
 
-
+        
         <!-- Button trigger modal -->
+        <a href="{% url 'orders:new_order_or_add_in_cart' product.name  %}"><button class="btn btn-primary btn-lg" type="button">Comprar agora</button></a>
         <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#compraModal" type="button">Adicionar ao carinho</button>
             <!-- Modal -->
             <div class="modal fade" id="compraModal" tabindex="-1" aria-labelledby="compraModalLabel" aria-hidden="true">
