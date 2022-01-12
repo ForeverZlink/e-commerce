@@ -18,7 +18,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'products:home_page' %}">Pagina inicial</a>
           </li>7
           {% if user.is_authenticated  %}
           <li class="nav-item">
@@ -40,6 +40,7 @@
 
 <main>
 
+
   <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
@@ -49,6 +50,17 @@
    
   </div>
 <h1 class="text-center">{{local_of_orders_text}}</h1>
+{% if all_orders %}
+  {% if are_in_cart  == "true" %}
+    <div class="container bg-light">
+      <div class="col-md-12 text-center">
+          <a href="{% url 'orders:finish_order' %}"><button class ="btn btn-primary btn-lg" type="button">Clique aqui para Finalizar a compra</button> </a>  
+      </div>
+
+  {% endif %}
+{% endif %}
+                      
+
 
 <div class="album py-5 bg-light">
     <div class="container">
@@ -83,7 +95,7 @@
         <h1>Você ainda não fez nenhum pedido. ;)</h1>
       {% endif %}
 
-
+  
         
         
   <!-- FOOTER -->

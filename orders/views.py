@@ -38,7 +38,7 @@ def finish_order_of_cart(request):
     email = EmailMessage(
             f'{head_for_email}',
             f"{content_for_email}",
-            to=[request.user.email ],
+            to=[EMAIL_DO_DONO_DO_SITE ],
             )
     email.send()
     #apaga todos os pedidos do carrinho de compras, pois o que é comprado não precisa estar no carrinho para as futuras compras 
@@ -107,3 +107,4 @@ def show_orders(request,orders_in_cart = 'false'):
     return render(request, 'products/show_orders.html',
                 context={'all_orders':orders,"local_of_orders_text":local,'are_in_cart':orders_in_cart
             })
+
