@@ -107,3 +107,4 @@ def show_orders(request,orders_in_cart = 'false'):
     return render(request, 'products/show_orders.html',
                 context={'all_orders':orders,"local_of_orders_text":local,'are_in_cart':orders_in_cart
             })
+

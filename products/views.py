@@ -11,7 +11,7 @@ def home_page(request):
 
 
 def show_detail_product(request,pk): 
-   
+    
     product=Product.objects.get(pk=pk)
     return render(request,
                 template_name='products/product_detail.html',
