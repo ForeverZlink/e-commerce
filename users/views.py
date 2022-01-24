@@ -12,3 +12,10 @@ def adress_user(request, cep ):
     object = requests.get(url)
     print(json.loads(object.content))
     return HttpResponse(object)
+
+def instagram_api_admin(request):
+    pass
+    
+
+def blog_of_admin(request):
+    pass
