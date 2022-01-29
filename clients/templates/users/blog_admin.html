@@ -1,0 +1,18 @@
+{% extends 'users/index.html' %}
+{% load static %}
+
+{% block content %}
+
+{% for media in all_media %}
+    <h1>{{media}}</h1>
+    {% for n in media.values %}
+        <img src="{{n}}" alt="">
+        <h3>{{n}}</h3>
+    
+    {% endfor %}
+{% endfor %}
+<h1>hello, just testing</h1>
+
+<script scr="{% static 'products/bootstrap/js/bootstrap.js' %}"></script>
+<script scr="{% static 'products/bootstrap/js/bootstrap.min.js' %}"></script>
+{% endblock content %}
