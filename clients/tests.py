@@ -12,6 +12,7 @@ class TestView(TestCase):
         response=requests.get(url)
         data= json.loads(response.content) 
         media_content = data['data']
+        print(media_content)
         path = 'clients:blog_of_admin'
         response=self.client.get(reverse(path))
         self.assertEqual(response.status_code, 200)
