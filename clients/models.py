@@ -20,10 +20,10 @@ class Client (models.Model):
         ('M','MASCULINO'),
         ('O','OUTRO'),
     ]
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=255, unique=True, blank=False, null=False)
-    date_of_born = models.DateField(null=False,blank=False,null=False)
+    date_of_born = models.DateField(null=False,blank=False)
     profision =  models.CharField(max_length=255, unique=False,blank=False)
-    genre   = models.Choices(max_lenght =1, choices=GENRES_CHOICES)
+    
 
 
