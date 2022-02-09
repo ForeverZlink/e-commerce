@@ -23,6 +23,7 @@ class Client (models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=255, unique=True, blank=False, null=False)
     date_of_born = models.DateField(null=False,blank=False)
+    email       = models.EmailField()
     profision =  models.CharField(max_length=255, unique=False,blank=False)
     
 

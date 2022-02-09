@@ -11,12 +11,13 @@
 
 <body block="" class="text-center">
   <main class="form-signin">
-    <form>
+    <form action = "{% url 'clients:login_custom' %}" method = 'POST'>
+      {% csrf_token %}
       <img class="mb-4" src="{% static 'products/imagens/logo.png' %}" alt="" width="300" height="200">
       <h1 class="h3 mb-3 fw-normal">Por favor, faça seu login</h1>
   
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
         <label for="floatingInput">Endereço de email</label>
       </div>
       <div class="form-floating">

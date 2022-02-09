@@ -26,3 +26,13 @@ def blog_of_admin(request):
     return render(request,
             template_name="users/blog_admin.html",context={"all_media":media_content}
             )
+def login_custom(request):
+    from clients.forms import ClientForm
+    if request.method == 'POST':
+        model_form = ClientForm(request.POST)
+        if model_form.is_valid():
+            pass
+            
+    
+
+    return HttpResponseRedirect(reverse('products:home_page'))
