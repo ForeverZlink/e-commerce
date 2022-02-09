@@ -88,28 +88,13 @@ WSGI_APPLICATION = 'e_commerce.wsgi.application'
 
 
 
-if 'test' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    password        = "005f67a0e14f617f56daa8b24f93d00ba5693ada7f2aa1d7cdca12a795c2c11c"
-    host            = "ec2-23-23-162-138.compute-1.amazonaws.com"
-    database_name   = "df612vfqgd6sia"
-    database_user     = "ibqrtklkbqwczb"
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('DB_NAME', database_name),
-            'USER': os.environ.get('DB_USER', database_user),
-            'PASSWORD': os.environ.get('DB_PASS',password ),
-            'HOST': host,
-            'PORT': '5432',
-        }
-    }
+
+DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -164,9 +149,7 @@ STATIC_URL = '/static/'
 
 dbx = dropbox.Dropbox('FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6')
 
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN ='FGPHbykyG-8AAAAAAAAAAXX-NlwQeHmaRjGrENdlkGICCukpegidIAdegn9R8HW6'
-DROPBOX_ROOT_PATH = ""
+
 
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
 
