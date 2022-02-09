@@ -1,11 +1,44 @@
 {% extends 'registration/index.html' %}
+{% load static %}
 
+{% block css_content_personali %}
+
+<link rel="stylesheet" href="{% static 'products/bootstrap/css/signin.css' %}">
+
+{% endblock css_content_personali %}
 {% block content %}
 
+
+<body block="" class="text-center">
+  <main class="form-signin">
+    <form>
+      <img class="mb-4" src="{% static 'products/imagens/logo.png' %}" alt="" width="300" height="200">
+      <h1 class="h3 mb-3 fw-normal">Por favor, faça seu login</h1>
+  
+      <div class="form-floating">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Endereço de email</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Senha</label>
+      </div>
+  
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Lembre-se
+        </label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+      <p class="mt-5 mb-3 text-muted">© 2017–2021</p>
+    </form>
+  </main>
+  
+  
+      
 <meta name="google-signin-client_id" content="624224382906-uldcfqfb770thktimpq6f2ajv1ome9m7.apps.googleusercontent.com">
 
 <div class="g-signin2" data-onsuccess="onSignIn"></div>
-<img src="https:\\/\\/scontent-gig2-1.cdninstagram.com\\/v\\/t51.29350-15\\/272476864_1124621528285309_5807424732002238924_n.jpg" alt="">
 
 <script >
   
