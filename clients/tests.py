@@ -2,6 +2,7 @@ from http import client
 from django.test import TestCase
 from django.shortcuts import render, reverse
 from clients.views import login_custom
+from django.contrib.auth.models import User
 # Create your tests here.
 class TestView(TestCase):
     def test_view_of_blog(self):
@@ -19,11 +20,15 @@ class TestView(TestCase):
         self.assertEqual(response.status_code, 200)
         
     def test_login_custom(self):
+        
         path = "clients:login_custom"
         email = 'carloscunha@gmail.com'
+        username = "carlos"
+        user_created=User.objects.create_user(username=username,password="123",email=email)
+        user_created.save()
+        response = self.client.post(reverse(path), data={'email':email,"password":"123"})
+        self.assertEqual(response.status_code,302)
         
-        response = self.client.post(reverse(path), data={'email':email})
-        print(response)
         
             
             

@@ -31,8 +31,13 @@ def blog_of_admin(request):
 def login_custom(request):
 
     email_user = request.POST['email']
+    password   = request.POST['password']
     user_searched=User.objects.get(email=email_user)
     
-    user_authenticate= authenticate(request=request,username=user_searched.username,password="123")
-    login(request,user_authenticate)
-    return HttpResponseRedirect(reverse('products:home_page'))
+    user_authenticate= authenticate(request=request,username=user_searched.username,password=password)
+    if user_authenticate is not None:
+        login(request,user_authenticate)
+        return HttpResponseRedirect(reverse('products:home_page'))
+    else:
+        return HttpResponse('error')
+    
