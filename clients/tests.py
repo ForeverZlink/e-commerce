@@ -1,6 +1,7 @@
 from http import client
 from django.test import TestCase
 from django.shortcuts import render, reverse
+from clients.views import login_custom
 # Create your tests here.
 class TestView(TestCase):
     def test_view_of_blog(self):
@@ -12,13 +13,17 @@ class TestView(TestCase):
         response=requests.get(url)
         data= json.loads(response.content) 
         media_content = data['data']
-        print(media_content)
+        
         path = 'clients:blog_of_admin'
         response=self.client.get(reverse(path))
         self.assertEqual(response.status_code, 200)
         
+    def test_login_custom(self):
+        path = "clients:login_custom"
+        email = 'carloscunha@gmail.com'
         
-
+        response = self.client.post(reverse(path), data={'email':email})
+        print(response)
         
             
             

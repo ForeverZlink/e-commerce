@@ -1,7 +1,9 @@
+import email
 from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseNotModified, HttpResponseRedirect
 from django.shortcuts import render, reverse
-
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 # Create your views here.
 
 
@@ -27,12 +29,10 @@ def blog_of_admin(request):
             template_name="users/blog_admin.html",context={"all_media":media_content}
             )
 def login_custom(request):
-    from clients.forms import ClientForm
-    if request.method == 'POST':
-        model_form = ClientForm(request.POST)
-        if model_form.is_valid():
-            pass
-            
-    
 
+    email_user = request.POST['email']
+    user_searched=User.objects.get(email=email_user)
+    
+    user_authenticate= authenticate(request=request,username=user_searched.username,password="123")
+    login(request,user_authenticate)
     return HttpResponseRedirect(reverse('products:home_page'))
