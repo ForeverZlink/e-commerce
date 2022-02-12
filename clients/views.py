@@ -1,4 +1,5 @@
 import email
+from multiprocessing import context
 from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseNotModified, HttpResponseRedirect
 from django.shortcuts import render, reverse
@@ -35,17 +36,15 @@ def login_custom(request):
         try:
             user_searched=User.objects.get(email=email_user)
         except User.DoesNotExist:
-            return HttpResponseRedirect(reverse("clients:login_custom"))
+            error= 'Por favor, digite um email válido'
+            return render(request, template_name='users/login.html',context={'error_message':error})
         else:
-            pass
-
-        
-        user_authenticate= authenticate(request=request,username=user_searched.username,password=password)
-        if user_authenticate is not None:
-            login(request,user_authenticate)
-            return HttpResponseRedirect(reverse('products:home_page'))
-        else:
-            return HttpResponse('error')
+            user_authenticate= authenticate(request=request,username=user_searched.username,password=password)
+            if user_authenticate is not None:
+                login(request,user_authenticate)
+                return HttpResponseRedirect(reverse('products:home_page'))
+            else:
+                return HttpResponse('error')
     else:
         return render(request, template_name="users/login.html")
     
