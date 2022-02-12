@@ -29,15 +29,23 @@ def blog_of_admin(request):
             template_name="users/blog_admin.html",context={"all_media":media_content}
             )
 def login_custom(request):
+    if request.method =='POST':
+        email_user = request.POST['email']
+        password   = request.POST['password']
+        try:
+            user_searched=User.objects.get(email=email_user)
+        except User.DoesNotExist:
+            return HttpResponseRedirect(reverse("clients:login_custom"))
+        else:
+            pass
 
-    email_user = request.POST['email']
-    password   = request.POST['password']
-    user_searched=User.objects.get(email=email_user)
-    
-    user_authenticate= authenticate(request=request,username=user_searched.username,password=password)
-    if user_authenticate is not None:
-        login(request,user_authenticate)
-        return HttpResponseRedirect(reverse('products:home_page'))
+        
+        user_authenticate= authenticate(request=request,username=user_searched.username,password=password)
+        if user_authenticate is not None:
+            login(request,user_authenticate)
+            return HttpResponseRedirect(reverse('products:home_page'))
+        else:
+            return HttpResponse('error')
     else:
-        return HttpResponse('error')
+        return render(request, template_name="users/login.html")
     
