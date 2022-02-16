@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseNotModified, HttpResponseRedirect
 from django.shortcuts import render, reverse
-
+import os
 # Create your views here.
 
 
@@ -17,7 +17,7 @@ def adress_user(request, cep ):
 def blog_of_admin(request):
     import requests
     import json
-    token = 'IGQVJXbDRMeWM5UnEza2hwLUpIN014dzJEcEphaUdBZAVdsbFBscC00emhLUFhJcld5bnMxTEJVc2ppVGdORjlqMVR4X2duYnF3UjRvQUJ5RlFKaExfY0oxQzQ4b3dVeHRKYlRvR1RCT25yblZAyelpybgZDZD'
+    token = os.environ.get('API_INSTAGRAM_TOKEN')
     url = f'https://graph.instagram.com/me/media?fields=media_url,caption,timestamp&access_token={token}'
     response=requests.get(url)
     data= json.loads(response.content) 
