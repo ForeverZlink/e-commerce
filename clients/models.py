@@ -24,7 +24,7 @@ class Client (models.Model):
     name = models.CharField(max_length=255, unique=True, blank=False, null=False)
     date_of_born = models.DateField(null=False,blank=False)
     email       = models.EmailField()
+    andress = models.OneToOneField(Andress, on_delete=models.DO_NOTHING, blank=True)
     profision =  models.CharField(max_length=255, unique=False,blank=False)
-    
 
 
