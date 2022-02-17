@@ -1,5 +1,6 @@
 import email
 from multiprocessing import context
+from clients.models import Client
 from django.shortcuts import render
 from django.http.response import HttpResponse, HttpResponseNotModified, HttpResponseRedirect
 from django.shortcuts import render, reverse
@@ -48,3 +49,16 @@ def login_custom(request):
     else:
         return render(request, template_name="users/login.html")
     
+def create_user(request):
+    
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        name   = request.POST['name']
+
+        user_object=User.objects.create_user(username=name,email=email,password=password)
+        
+    
+    else:
+
+        pass

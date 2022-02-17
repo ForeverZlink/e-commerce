@@ -29,6 +29,14 @@ class TestView(TestCase):
         response = self.client.post(reverse(path), data={'email':email,"password":"123"})
         self.assertEqual(response.status_code,302)
         
+    def create_user(self):
+        path = "clients:create_user"
+        email = 'carloscunha@gmail.com'
+        username = "carlos"
+        user_created=User.objects.create_user(username=username,password="123",email=email)
+        user_created.save()
+        response = self.client.post(reverse(path), data={"usernmae":username,'email':email,"password":"123"})
+        self.assertEqual(response.status_code,302)
         
             
             
