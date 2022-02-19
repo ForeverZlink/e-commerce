@@ -1,0 +1,137 @@
+{% extends 'users/index.html' %}
+
+{% load static %}
+{% block css_content_personali %}
+
+
+<link href="https://getbootstrap.com/docs/5.1/examples/checkout/form-validation.css" rel="stylesheet">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/checkout/">
+{% endblock css_content_personali %}
+{% block content %}
+<body class="bg-light">
+    
+    <div class="container">
+      <main>
+        <div class="py-5 text-center">
+          
+          <h2>Formulário de criação de conta</h2>
+          <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        </div>
+    
+        <div class="row g-5">
+          <div class="col-md-5 col-lg-4 order-md-last">
+            
+    
+          
+          </div>
+          <div class="col-md-7 col-lg-8">
+            <h4 class="mb-3">Informações</h4>
+            <form class="needs-validation" novalidate="">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label for="name" class="form-label">Nome completo</label>
+                  <input type="text" class="form-control" id="name" placeholder="Nome completo" value="" required="" spellcheck="false" data-ms-editor="true">
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+    
+                <div class="col-12">
+                  <label for="username" class="form-label">Username</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" id="username" placeholder="Username" required="" spellcheck="false" data-ms-editor="true">
+                  <div class="invalid-feedback">
+                      Seu nome de usuário é obrigatório
+                    </div>
+                  </div>
+                </div>
+    
+                
+    
+                <div class="col-12">
+                  <label for="address" class="form-label">Endereço de entregas</label>
+                  <input type="text" class="form-control" name='andress' id="complement" placeholder="1234 Main St" required="" spellcheck="false" data-ms-editor="true">
+                  <div class="invalid-feedback">
+                    Coloque aqui seu endereço
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label for="cep" class="form-label">Seu cep</label>
+                  <input type="text" class="form-control" id="cep" name = "cep" placeholder="Exemplo:12344-239" required="" spellcheck="false" data-ms-editor="true">
+                  <div class="invalid-feedback">
+                    Coloque aqui seu endereço
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label for="district" class="form-label">Seu bairro</label>
+                  <input type="text" class="form-control" id="district" name = "district" placeholder="Exemplo:12344-239" required="" spellcheck="false" data-ms-editor="true">
+                  <div class="invalid-feedback">
+                    Coloque aqui seu bairro
+                  </div>
+                </div>
+                
+    
+    
+                <div class="col-md-4">
+                  <label for="state" class="form-label">Estado</label>
+                  <select class="form-select" id="state" name = 'state' required="">
+                    <option value="">Choose...</option>
+                    <option>Rio de Janeiro</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Digite seu estado.
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  
+                </div>
+                <div class="col-12">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" required=true>
+                  <div class="invalid-feedback">
+                    Digite um email válido
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="password" class="form-label">Senha</label>
+                  <input type="password" class="form-control" id="password" placeholder="Crie sua senha" required=true>
+                  <div class="invalid-feedback">
+                    Digite um email válido
+                  </div>
+                </div>
+              <input type="hidden" name="profision" value ='none'>
+                
+    
+              <hr class="my-4">
+    
+             
+              
+    
+              <button class="w-100 btn btn-dark btn-lg" type="submit">Criar conta</button>
+            </form>
+          </div>
+        </div>
+      </main>
+    
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017–2021 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+    
+    
+    <script scr="{% static 'products/bootstrap/js/bootstrap.js' %}"></script>
+    <script scr="{% static 'products/bootstrap/js/bootstrap.min.js' %}"></script>
+    
+<script src="https://getbootstrap.com/docs/5.1/examples/checkout/form-validation.js"></script>
+
+<script src="https://getbootstrap.com/docs/5.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+{% endblock content %}

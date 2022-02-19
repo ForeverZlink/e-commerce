@@ -55,10 +55,15 @@ def create_user(request):
         email = request.POST['email']
         password = request.POST['password']
         name   = request.POST['name']
+        date_of_born = request.POST["date_of_born"]
+        profision = request.POST['profision']
+    
 
         user_object=User.objects.create_user(username=name,email=email,password=password)
-        
+        client_object=Client.objects.create(user=user_object,name=name,
+                date_of_born=date_of_born,
+                profision=profision
+                )
     
     else:
-
-        pass
+        return render(request, template_name='users/new_user.html')
